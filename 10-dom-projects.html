@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+</head>
+<style>
+    body{
+       
+        font-family: Arial;
+       
+    }
+    .subsribe-button{
+        border: none;
+        border-radius: 20px;
+        padding: 10px 15px;
+        background-color: black;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+        margin-bottom: 30px;
+        
+    }
+    .is-subsribed{
+       color: black;
+       background-color: #eeeded;
+    }
+    .cost-input{
+        font-size: 15px;
+        padding: 6px 8px;
+    }
+    .calculate-total{
+        padding: 8px 15px;
+        color: white;
+        background-color: green;
+        border: none;
+        font-size: 15px;
+        cursor: pointer;
+        
+    }
+</style>
+<body>
+    <!-- //innerHTML: khong the lay duoc text button khi co space -->
+    <!-- //innerText: lay dc text khi co space-->
+    <p>YouTube Subscribe Button</p>
+    <button onclick="
+    Subscribe();
+    " class="js-subcribe-button subsribe-button">
+        Subscribe</button>
+
+    <p>Amazon Shipping Calculator</p>
+    <p>Orders under $40=+$10 shipping</p>
+    <p>Orders over $50= FREE shipping</p>
+    <input class="js-cost-input cost-input" placeholder="Cost of order" onkeydown="
+    handleCostKeydown(event);
+    ">
+    <button class="calculate-total" onclick="
+    CalculateTotal();
+    ">Calculate</button>
+    <p class="js-total "></p>
+    <script>
+       
+
+        
+
+        function handleCostKeydown(event) {
+            console.log(event.key);
+            if (event.key === 'Enter') {
+                CalculateTotal();
+            }
+        }
+        function Subscribe() {
+            const buttonElement = document.querySelector('.js-subcribe-button');
+            if (buttonElement.innerText === 'Subscribe') {
+                buttonElement.innerHTML = 'Subscribed';
+                //add class name for button subsribed
+                buttonElement.classList.add('is-subsribed');
+            } else {
+                buttonElement.innerHTML = 'Subscribe';
+                buttonElement.classList.remove('is-subsribed');
+            }
+        }
+        function CalculateTotal() {
+            const inputElement = document.querySelector('.js-cost-input');
+            let cost = parseFloat(inputElement.value);//c1
+            // c2 let cost = Number(inputElement.value);
+            if (cost < 40) {
+                cost = cost + 10;
+            }
+            document.querySelector('.js-total').innerHTML = `$${cost}`;
+
+
+        }
+    </script>
+</body>
+
+</html>
